@@ -1,0 +1,50 @@
+name: Golang CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    name: Build
+    strategy:
+      matrix:
+        go-version: [ 1.17 ]
+        platform: [ ubuntu-latest, macos-latest, windows-latest ]
+    runs-on: ${{ matrix.platform }}
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{ matrix.go-version }}
+
+      - name: Cache Go
+        uses: actions/cache@v2
+        with:
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+          path: |
+            ~/go/pkg/mod              # Module download cache
+            ~/.cache/go-build         # Build cache (Linux)
+            ~/Library/Caches/go-build # Build cache (Mac)
+            '%LocalAppData%\go-build' # Build cache (Windows)
+
+      - name: Build Go
+        run: |
+          go build -o bin/grafana-plot cmd/grafana-plot/main.go
+          go build -o bin/prometheus-plot cmd/prometheus-plot/main.go
+
+      - name: Upload Go Binary
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ runner.os }}-app
+          path: bin/*-plot
+          if-no-files-found: error
