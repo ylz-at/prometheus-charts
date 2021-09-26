@@ -42,6 +42,9 @@ jobs:
             ~/Library/Caches/go-build
             '%LocalAppData%\go-build'
 
+      - name: Test Go
+        run: go test ./...
+
       - name: Build Go
         run: |
           go build -o bin/grafana-plot cmd/grafana-plot/main.go
