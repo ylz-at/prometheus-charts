@@ -17,7 +17,7 @@ import (
 )
 
 // Only show important part of metric name
-var labelText = regexp.MustCompile("\\{(.*)\\}")
+var labelText = regexp.MustCompile(`(.*)`)
 
 // Plot creates a plot from metric data and saves it to a temporary file.
 // It's the callers responsibility to remove the returned file when no longer needed.

@@ -61,11 +61,7 @@ func (c *Config) LabelValues() []LabelValue {
 	values := make([]LabelValue, 0, len(c.Templating.List))
 
 	for _, v := range c.Templating.List {
-		if !strings.HasPrefix(v.Query, "label_values(") {
-			continue
-		}
-
-		q := strings.Trim(v.Query, "label_values(")
+		q := strings.TrimPrefix(v.Query, "label_values(")
 		q = strings.Trim(q, ")")
 		seps := strings.Split(q, ", ")
 		if len(seps) != 2 {

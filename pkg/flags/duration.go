@@ -9,7 +9,7 @@ import (
 
 type durationValue time.Duration
 
-var matchDay = regexp.MustCompile("[-+]?[0-9]*(\\.[0-9]*)?d")
+var matchDay = regexp.MustCompile(`[-+]?[0-9]*(\.[0-9]*)?d`)
 
 func (d *durationValue) Set(s string) error {
 	if is := matchDay.FindStringIndex(s); is != nil {
