@@ -41,6 +41,7 @@ jobs:
         run: |
           go build -o bin/grafana-plot cmd/grafana-plot/main.go
           go build -o bin/prometheus-plot cmd/prometheus-plot/main.go
+          ls ~/go/pkg/mod
 
       - name: Upload Go Binary
         uses: actions/upload-artifact@v2
