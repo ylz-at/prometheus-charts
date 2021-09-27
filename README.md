@@ -1,5 +1,4 @@
-# Prometheus Charts [![Golang CI](https://github.com/ylz-at/prometheus-charts/actions/workflows/go.yml/badge.svg)](https://github.com/ylz-at/prometheus-charts/actions/workflows/go.yml)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fylz-at%2Fprometheus-charts.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fylz-at%2Fprometheus-charts?ref=badge_shield)
+# Prometheus Charts [![Golang CI](https://github.com/ylz-at/prometheus-charts/actions/workflows/go.yml/badge.svg)](https://github.com/ylz-at/prometheus-charts/actions/workflows/go.yml) [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fylz-at%2Fprometheus-charts.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fylz-at%2Fprometheus-charts?ref=badge_shield)
 
 `prometheus-charts` is used for plotting the metrics in prometheus to images.
 
