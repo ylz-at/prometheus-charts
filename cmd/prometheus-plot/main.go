@@ -48,7 +48,7 @@ func main() {
 		*output = fmt.Sprintf("%s.%s", *title, *format)
 	}
 
-	if err := plot.PlotFile(m, *title, *format, *output); err != nil {
+	if err := plot.WriteToFile(m, *title, *format, *output); err != nil {
 		panic(err)
 	}
 }
