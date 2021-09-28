@@ -8,7 +8,9 @@ import (
 	"strconv"
 
 	"github.com/prometheus/common/model"
+	stdfnt "golang.org/x/image/font"
 	"gonum.org/v1/plot"
+	"gonum.org/v1/plot/font"
 	"gonum.org/v1/plot/palette/brewer"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
@@ -23,8 +25,21 @@ var labelText = regexp.MustCompile(`(.*)`)
 func Plot(metrics model.Matrix, title, format string) (io.WriterTo, error) {
 	p := plot.New()
 	p.Title.Text = title
+	p.Title.TextStyle.Font = font.From(font.Font{
+		Typeface: "Liberation",
+		Variant:  "Mono",
+		Style:    stdfnt.StyleItalic,
+		Weight:   stdfnt.WeightBold,
+	}, 0.35*vg.Centimeter)
 	p.Title.Padding = 2 * vg.Centimeter
 	p.X.Tick.Marker = plot.TimeTicks{Format: "2006-01-02\n15:04:05"}
+	normalFont := font.From(font.Font{
+		Typeface: "Liberation",
+		Variant:  "Mono",
+	}, 3*vg.Millimeter)
+	p.X.Tick.Label.Font = normalFont
+	p.Y.Tick.Label.Font = normalFont
+	p.Legend.TextStyle.Font = normalFont
 	p.Legend.Top = true
 	p.Legend.YOffs = 15 * vg.Millimeter
 
@@ -66,7 +81,7 @@ func Plot(metrics model.Matrix, title, format string) (io.WriterTo, error) {
 	// Draw plot in canvas with margin
 	margin := 6 * vg.Millimeter
 	width := 24 * vg.Centimeter
-	height := 20 * vg.Centimeter
+	height := 10 * vg.Centimeter
 	c, err1 := draw.NewFormattedCanvas(width, height, format)
 	if err1 != nil {
 		return nil, fmt.Errorf("failed to create canvas: %v", err1)
