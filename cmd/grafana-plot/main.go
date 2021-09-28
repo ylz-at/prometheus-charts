@@ -91,7 +91,7 @@ func main() {
 					matrix = append(matrix, m...)
 				}
 
-				err = plot.PlotFile(matrix, panel.Title, *format, name)
+				err = plot.WriteToFile(matrix, panel.Title, *format, name)
 				if err != nil {
 					// TODO: handle Nan data point
 					fmt.Printf("plot %s-%s failed %v\n", rowTitle, panel.Title, err)

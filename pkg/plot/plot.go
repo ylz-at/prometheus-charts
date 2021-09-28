@@ -9,7 +9,6 @@ import (
 
 	"github.com/prometheus/common/model"
 	"gonum.org/v1/plot"
-	"gonum.org/v1/plot/font"
 	"gonum.org/v1/plot/palette/brewer"
 	"gonum.org/v1/plot/plotter"
 	"gonum.org/v1/plot/vg"
@@ -20,26 +19,12 @@ import (
 var labelText = regexp.MustCompile(`(.*)`)
 
 // Plot creates a plot from metric data and saves it to a temporary file.
-// It's the callers responsibility to remove the returned file when no longer needed.
+// It's the callers' responsibility to remove the returned file when no longer needed.
 func Plot(metrics model.Matrix, title, format string) (io.WriterTo, error) {
 	p := plot.New()
-
-	titleFont, err := vg.MakeFont("Helvetica-Bold", vg.Centimeter)
-	if err != nil {
-		return nil, fmt.Errorf("failed to load font: %v", err)
-	}
-	textFont, err := vg.MakeFont("Helvetica", 3*vg.Millimeter)
-	if err != nil {
-		return nil, fmt.Errorf("failed to load font: %v", err)
-	}
-
 	p.Title.Text = title
-	p.Title.TextStyle = draw.TextStyle{Font: font.Font{Typeface: font.Typeface(titleFont.Name())}}
 	p.Title.Padding = 2 * vg.Centimeter
-	p.X.Tick.Marker = plot.TimeTicks{Format: "2006-01-02\n15:04"}
-	p.X.Tick.Label.Font = font.Font{Typeface: font.Typeface(textFont.Name())}
-	p.Y.Tick.Label.Font = font.Font{Typeface: font.Typeface(textFont.Name())}
-	p.Legend.TextStyle = draw.TextStyle{Font: font.Font{Typeface: font.Typeface(textFont.Name())}}
+	p.X.Tick.Marker = plot.TimeTicks{Format: "2006-01-02\n15:04:05"}
 	p.Legend.Top = true
 	p.Legend.YOffs = 15 * vg.Millimeter
 
@@ -82,29 +67,32 @@ func Plot(metrics model.Matrix, title, format string) (io.WriterTo, error) {
 	margin := 6 * vg.Millimeter
 	width := 24 * vg.Centimeter
 	height := 20 * vg.Centimeter
-	c, err := draw.NewFormattedCanvas(width, height, format)
-	if err != nil {
-		return nil, fmt.Errorf("failed to create canvas: %v", err)
+	c, err1 := draw.NewFormattedCanvas(width, height, format)
+	if err1 != nil {
+		return nil, fmt.Errorf("failed to create canvas: %v", err1)
 	}
 	p.Draw(draw.Crop(draw.New(c), margin, -margin, margin, -margin))
 
 	return c, nil
 }
 
-// PlotFile plots the metric and write to file
-func PlotFile(metrics model.Matrix, title string, format string, name string) error {
+// WriteToFile plots the metric and write to file
+func WriteToFile(metrics model.Matrix, title string, format string, name string) error {
 	w, err := Plot(metrics, title, format)
 	if err != nil {
 		return err
 	}
 
-	f, err := os.OpenFile(name, os.O_CREATE|os.O_WRONLY, 0666)
-	if err != nil {
+	f, err1 := os.OpenFile(name, os.O_CREATE|os.O_WRONLY, 0666)
+	if err1 != nil {
+		return err1
+	}
+
+	if _, err := w.WriteTo(f); err != nil {
 		return err
 	}
-	defer f.Close()
 
-	if _, err = w.WriteTo(f); err != nil {
+	if err := f.Close(); err != nil {
 		return err
 	}
 
