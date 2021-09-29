@@ -4,7 +4,8 @@ go 1.17
 
 require (
 	github.com/prometheus/client_golang v1.11.0
-	github.com/prometheus/common v0.31.0
+	github.com/prometheus/common v0.31.1
+	golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d
 	gonum.org/v1/plot v0.10.0
 )
 
@@ -18,6 +19,5 @@ require (
 	github.com/json-iterator/go v1.1.11 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
-	golang.org/x/image v0.0.0-20210628002857-a66eb6448b8d // indirect
 	golang.org/x/text v0.3.6 // indirect
 )
