@@ -3,7 +3,7 @@ module github.com/ylz-at/prometheus-charts
 go 1.17
 
 require (
-	github.com/prometheus/client_golang v1.12.2
+	github.com/prometheus/client_golang v1.13.0
 	github.com/prometheus/common v0.37.0
 	golang.org/x/image v0.0.0-20220302094943-723b81ca9867
 	gonum.org/v1/plot v0.11.0
