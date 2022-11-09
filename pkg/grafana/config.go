@@ -36,7 +36,7 @@ type Config struct {
 func ParseConfig(path string) (*Config, error) {
 	var c Config
 
-	data, err := ioutil.ReadFile(path)
+	data, err := io.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
