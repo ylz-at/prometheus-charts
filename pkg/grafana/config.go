@@ -2,7 +2,7 @@ package grafana
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"strings"
 )
 
