@@ -4,7 +4,7 @@ go 1.17
 
 require (
 	github.com/prometheus/client_golang v1.19.0
-	github.com/prometheus/common v0.50.0
+	github.com/prometheus/common v0.52.3
 	golang.org/x/image v0.15.0
 	gonum.org/v1/plot v0.12.0
 )
