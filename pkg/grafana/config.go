@@ -2,7 +2,7 @@ package grafana
 
 import (
 	"encoding/json"
-	"io"
+	"os"
 	"strings"
 )
 
@@ -36,7 +36,7 @@ type Config struct {
 func ParseConfig(path string) (*Config, error) {
 	var c Config
 
-	data, err := io.ReadFile(path)
+	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
