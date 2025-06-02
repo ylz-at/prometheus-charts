@@ -7,7 +7,7 @@ toolchain go1.24.2
 require (
 	github.com/prometheus/client_golang v1.21.0
 	github.com/prometheus/common v0.64.0
-	golang.org/x/image v0.26.0
+	golang.org/x/image v0.27.0
 	gonum.org/v1/plot v0.16.0
 )
 
