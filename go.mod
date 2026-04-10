@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/prometheus/client_golang v1.23.2
 	github.com/prometheus/common v0.67.4
-	golang.org/x/image v0.37.0
+	golang.org/x/image v0.39.0
 	gonum.org/v1/plot v0.16.0
 )
 
@@ -24,6 +24,6 @@ require (
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_model v0.6.2 // indirect
 	go.yaml.in/yaml/v2 v2.4.3 // indirect
-	golang.org/x/text v0.35.0 // indirect
+	golang.org/x/text v0.36.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
 )
